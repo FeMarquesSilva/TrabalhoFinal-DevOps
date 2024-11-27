@@ -2,7 +2,6 @@ FROM grafana/grafana:latest
 
 USER root
 
-
 # Certifique-se de que o diretório `provisioning/dashboards` existe antes de copiá-lo
 RUN mkdir -p /etc/grafana/provisioning/dashboards /etc/grafana/provisioning/datasources
 
@@ -12,6 +11,6 @@ COPY provisioning/dashboard.yml /etc/grafana/provisioning/dashboards/
 COPY dashboards/mariadb_dashboard.json /etc/grafana/provisioning/dashboards/
 
 # Garantir permissões para o usuário grafana
-RUN chown -RW 472:472 /etc/grafana/provisioning
+RUN chown -R 472:472 /etc/grafana/provisioning
 
 USER grafana
