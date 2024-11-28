@@ -1,8 +1,15 @@
 import pytest
-import requests
+from flask import Flask
+from app import app, db, Aluno
 
-BASE_URL = "http://localhost:5000"
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        with app.app_context():
+            db.create_all()
+        yield client
 
-def test_register_student():
-    response = requests.post(f"{BASE_URL}/register", json={"name": "Teste", "ra": "123456"})
+def test_adicionar_aluno(client):
+    response = client.post('/alunos', json={"nome": "João", "ra": "123456"})
     assert response.status_code == 201
