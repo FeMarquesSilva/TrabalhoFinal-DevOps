@@ -3,10 +3,20 @@ pipeline {
     
     environment {
         // Define o local do composer;
-        COMPOSER = '/usr/local/bin/composer'
+        COMPOSER = 'docker-compose.yml'
     }
 
     stages {
+                stage('Build') {
+            steps {
+            sh '''
+                docker compose down
+                docker compose build
+                docker compose up -d
+                docker compose ps
+            '''
+        }
+    }
         stage('Checkout') {
             steps {
                 // Faz o checkout do código do repositório
