@@ -17,31 +17,25 @@ pipeline {
             '''
         }
     }
-        stage('Checkout') {
-            steps {
-                // Faz o checkout do código do repositório
-                git 'https://your-repository-url.git'
-            }
-        }
-        
-        stage('Install Dependencies') {
-            steps {
-                // Instala as dependências do Composer
-                script {
-                    sh "${env.COMPOSER} install --no-interaction"
+        stage('Wait for flask') {
+        steps {
+            script {
+            def isReady = false
+            for (int i = 0; i < 10; i++) { // Tentativas por 10 segundos
+                try {
+                    sh 'curl -X GET http://localhost:5000/alunos'
+                    isReady = true
+                    break
+                } catch (Exception e) {
+                    sleep(1) // Aguarda 1 segundo antes de tentar novamente
                 }
             }
-        }
-        
-        stage('Run Tests') {
-            steps {
-                // Aqui você pode rodar testes, por exemplo, com PHPUnit
-                script {
-                    sh 'php vendor/bin/phpunit'
-                }
+            if (!isReady) {
+                error "Servidor Flask não iniciou a tempo!"
             }
+          }
         }
-
     }
+}
 }
 
