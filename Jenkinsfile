@@ -36,6 +36,23 @@ pipeline {
           }
         }
     }
-}
-}
+    stage('Test') {
+    steps {
+         sh '''
+                curl -X GET http://localhost:5000/alunos
+
+                curl -X POST http://localhost:5000/alunos \
+            -H "Content-Type: application/json" \
+     -d '{
+           "nome": "Teste",
+           "sobrenome": "Teste",
+           "turma": "Teste",
+           "disciplinas": "Teste1, Teste2"
+         }'
+
+            '''
+            }
+        }
+    }
+}   
 
