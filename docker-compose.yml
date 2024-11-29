@@ -11,6 +11,7 @@ services:
       - FLASK_ENV=development
     depends_on:
       - mariadb
+    entrypoint: ["./wait-for-it.sh", "mariadb:3306", "--", "flask", "run", "--host=0.0.0.0"]
 
   mariadb:
     build:
@@ -23,6 +24,8 @@ services:
       MYSQL_DATABASE: school_db
       MYSQL_USER: flask_user
       MYSQL_PASSWORD: flask_password
+    volumes:
+      - mariadb_data:/var/lib/mysql
 
   prometheus:
     image: prom/prometheus
@@ -55,3 +58,6 @@ services:
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/var/lib/grafana/dashboards
+
+volumes:
+  mariadb_data:
