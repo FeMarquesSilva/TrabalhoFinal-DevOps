@@ -1,4 +1,3 @@
-# Código principal do Flask (app.py)
 import time
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -9,9 +8,12 @@ from sqlalchemy.exc import OperationalError
 from prometheus_flask_exporter import PrometheusMetrics
 import logging
 
+# Inicializando o Flask
 app = Flask(__name__)
 
+# Configuração do Prometheus
 metrics = PrometheusMetrics(app)
+
 # Configuração da chave secreta para sessões
 app.config['SECRET_KEY'] = 'minha_chave_secreta_super_secreta'  # Substitua por uma chave segura
 
@@ -19,7 +21,7 @@ app.config['SECRET_KEY'] = 'minha_chave_secreta_super_secreta'  # Substitua por 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root_password@mariadb/school_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Inicializar o banco de dados e o AppBuilder
+# Inicializando o banco de dados e o AppBuilder
 db = SQLAlchemy(app)
 appbuilder = AppBuilder(app, db.session)
 
@@ -32,7 +34,9 @@ attempts = 5
 for i in range(attempts):
     try:
         with app.app_context():
+            logger.info("Tentando criar tabelas no banco de dados...")
             db.create_all()  # Inicializa o banco de dados
+            logger.info("Tabelas criadas com sucesso!")
             # Criar um usuário administrador padrão
             if not appbuilder.sm.find_user(username='admin'):
                 appbuilder.sm.add_user(
@@ -91,5 +95,6 @@ def adicionar_aluno():
     logger.info(f"Aluno {data['nome']} {data['sobrenome']} adicionado com sucesso!")
     return jsonify({'message': 'Aluno adicionado com sucesso!'}), 201
 
+# Iniciar o servidor Flask
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
