@@ -1,0 +1,25 @@
+#Mata todos os conteiners em execução:
+docker stop $(docker ps -aq) && docker rm $(docker ps -aq) 
+
+#Construe todos os conteiners novamente sem cache salvo:
+docker-compose build --no-cache
+
+#Inicia todos os containers da aplicação:
+docker-compose up -d
+
+#Lista os conteiners em execução:
+docker ps
+
+#Executa(Entra) um conteiner:
+docker exec -it <Nome do conteiner> bash
+
+#Lista os arquivos no diretório atual:
+ls
+
+#Retorna do container que está(Caso ativo):
+Exit
+
+
+
+
+

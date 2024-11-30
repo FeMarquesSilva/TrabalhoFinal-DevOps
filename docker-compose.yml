@@ -57,6 +57,15 @@ services:
     networks:
       - app_network
 
+  tests:
+    build:
+      context: ./flask
+      dockerfile: Dockerfile_flask
+    command: pytest /app/testAddAluno.py
+    depends_on:
+      - mariadb
+      - flask
+
 networks:
   app_network:
     driver: bridge
