@@ -32,7 +32,7 @@ PROJETOFINAL/
 │ │ └── mariadb_dashboard.json
 │ ├── provisioning/
 │ │ └── datasources/
-│ │     ├── dashboard.yml
+│ │     ├── datasources.yml
 │ │ └── dashboard.yml
 │ │ └── datasource.yml
 │ │ └── Dockerfile_grafana
