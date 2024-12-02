@@ -13,5 +13,5 @@ COPY app.py /app/
 # Copiar também o arquivo de teste test_app.py
 COPY testAddAluno.py /app/
 
-# Aguardar 15 segundo antes de iniciar o Flask
-CMD ["sh", "-c", "sleep 15 && flask run --host=0.0.0.0"]
+# Iniciar o Flask
+CMD ["flask", "run", "--host=0.0.0.0"]

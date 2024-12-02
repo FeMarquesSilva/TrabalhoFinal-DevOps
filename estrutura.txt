@@ -26,7 +26,8 @@ PROJETOFINAL/
 ├── flask/
 │ ├── app.py
 │ ├── Dockerfile_flask
-│ └── requirements.txt
+│ ├── requirements.txt
+│ └── testAddAluno.py
 ├── grafana/
 │ ├── dashboards/
 │ │ └── mariadb_dashboard.json
@@ -41,7 +42,5 @@ PROJETOFINAL/
 │ └── Dockerfile_mariadb
 ├── prometheus/
 │ └── prometheus.yml
-├── tests/
-│ └── test_aluno.py
 ├── docker-compose.yml
 └──  Jenkinsfile

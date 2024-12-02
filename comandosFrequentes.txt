@@ -19,6 +19,9 @@ ls
 #Retorna do container que está(Caso ativo):
 Exit
 
+#Encerra de forma forçada o prometeus(Isso pois meu not ficou iniciando incorretamente o prometheus no not):
+sudo systemctl stop prometheus
+
 
 
 

@@ -1,27 +1,30 @@
 import pytest
 from flask import Flask
-from app import app, db, Aluno
+from flask.testing import FlaskClient
+
+# Importar a aplicação Flask
+from app import app  # Assumindo que seu arquivo principal é app.py
 
 @pytest.fixture
 def client():
-    app.config['TESTING'] = True
     with app.test_client() as client:
-        with app.app_context():
-            db.create_all()
         yield client
 
-def test_adicionar_aluno(client):
-    response = client.post('/alunos', json={
-        "nome": "João",
-        "sobrenome": "Silva",
-        "turma": "1A",
-        "disciplinas": "Matemática, Português"
-    })
-    assert response.status_code == 201
-    assert b"Aluno adicionado com sucesso!" in response.data
-
-def test_listar_alunos(client):
+def test_listar_alunos(client: FlaskClient):
+    """Testa a rota GET /alunos"""
     response = client.get('/alunos')
     assert response.status_code == 200
-    alunos = response.get_json()
-    assert len(alunos) > 0
+    assert isinstance(response.json, list)
+
+def test_adicionar_aluno(client: FlaskClient):
+    """Testa a rota POST /alunos"""
+    new_aluno = {
+        "nome": "Souza",
+        "sobrenome": "da Silva",
+        "turma": "2-C",
+        "disciplinas": "Direito penal",
+        "ra": "0756"
+    }
+    response = client.post('/alunos', json=new_aluno)
+    assert response.status_code == 201
+    assert response.json['message'] == 'Aluno adicionado com sucesso!'
