@@ -52,7 +52,15 @@ Faça login no Grafana (admin/admin).
 ![image](https://github.com/user-attachments/assets/9995dae5-4779-4407-924a-e19f9019fd65)
 ![image](https://github.com/user-attachments/assets/c30b2e07-5d87-4c93-8dae-a9857dcc1881)
 
-Configure a fonte de dados para Prometheus, se necessário.
+Configuração do App Flask:
+
+Faça login:
+
+*User: admin
+
+*senha: admin
+![image](https://github.com/user-attachments/assets/d7cde5fe-4f52-44cc-9f04-3540e9151ceb)
+
 
 Pipeline CI/CD:
 
