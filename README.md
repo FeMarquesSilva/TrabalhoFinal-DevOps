@@ -30,7 +30,7 @@ Certifique-se de ter os seguintes softwares instalados:
 
    ```bash
    git clone https://github.com/FeMarquesSilva/Trabalho_DevOps_22.8883-5.git
-   cd PROJETOFINAL
+
 Configure o arquivo .env (se necessário) para o exportador MySQL no diretório exporter/.
 Certifique-se de que os arquivos de configuração, como prometheus.yml e datasources.yml, estão ajustados conforme as suas necessidades.
 
@@ -49,6 +49,9 @@ Prometheus: http://localhost:9090
 Configuração do Grafana:
 
 Faça login no Grafana (admin/admin).
+![image](https://github.com/user-attachments/assets/9995dae5-4779-4407-924a-e19f9019fd65)
+![image](https://github.com/user-attachments/assets/c30b2e07-5d87-4c93-8dae-a9857dcc1881)
+
 Configure a fonte de dados para Prometheus, se necessário.
 
 Pipeline CI/CD:
