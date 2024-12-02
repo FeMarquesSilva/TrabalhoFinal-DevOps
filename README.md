@@ -38,6 +38,7 @@ Como Executar
 Inicie os contêineres:
 
 docker-compose build --no-cache
+
 docker-compose up -d
 
 Acesse os serviços 'localhoust':
