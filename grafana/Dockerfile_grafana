@@ -3,7 +3,8 @@ FROM grafana/grafana:latest
 USER root
 
 # Certifique-se de que o diretório `provisioning/dashboards` existe antes de copiá-lo
-RUN mkdir -p /etc/grafana/provisioning/dashboards /etc/grafana/provisioning/datasources
+#Correção do caminho onde devem estar os dashboards
+RUN mkdir /var/lib/grafana/dashboards 
 
 # Copiar os arquivos para o diretório correto
 COPY provisioning/datasource.yml /etc/grafana/provisioning/datasources/
