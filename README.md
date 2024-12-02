@@ -42,10 +42,8 @@ docker-compose up -d
 
 Acesse os serviços 'localhoust':
 
-Nome	Porta
-Flask	5000
-Grafana	3000
-Prometheus	9090
+![image](https://github.com/user-attachments/assets/37fda319-f5c3-4424-bc91-a71a0efd0ab4)
+
 
 Configuração do Grafana:
 
