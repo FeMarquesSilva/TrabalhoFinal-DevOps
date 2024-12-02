@@ -42,9 +42,12 @@ docker-compose up -d
 
 Acesse os serviços:
 
-Aplicação Flask: http://localhost:5000
-Grafana: http://localhost:3000
-Prometheus: http://localhost:9090
+Nome	Porta
+Flask	5000
+Grafana	3000
+Prometheus	9090
+![image](https://github.com/user-attachments/assets/92ae5d28-327f-449e-9f2d-21810ed4564e)
+
 
 Configuração do Grafana:
 
