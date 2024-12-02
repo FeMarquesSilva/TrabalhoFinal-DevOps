@@ -1,6 +1,4 @@
- ===================================
 Autor: Felipe Marques da Silva
- ===================================
 
 # Projeto Final - Ambiente Monitorado com Pipeline CI/CD
 
