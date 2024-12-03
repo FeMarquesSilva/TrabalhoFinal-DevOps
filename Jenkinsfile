@@ -1,12 +1,52 @@
 pipeline {
     agent any
+
+    environment {
+        REPOSITORY_URL = 'https://github.com/FeMarquesSilva/Trabalho_DevOps_22.8883-5.git'
+        BRANCH_NAME = 'main'
+    }
+
     stages {
-        stage('Docker Info') {
+        stage('Baixar código do Git') {
+            steps {
+                // Clonar o repositório do Git
+                git branch: "${BRANCH_NAME}", url: "${REPOSITORY_URL}"
+            }
+        }
+
+        stage('Build e Deploy') {
             steps {
                 script {
-                    sh 'docker --version'
+                    // Construir as imagens Docker para cada serviço
+                    sh '''
+                        docker compose build no cache
+                    '''
+
+                    // Subir os containers do Docker com Docker Compose
+                    sh '''
+                        docker compose up -d
+                    '''
                 }
             }
+        }
+
+        stage('Rodar Testes') {
+            steps {
+                script {
+                    // Rodar os testes com o pytest (ou qualquer outra ferramenta de testes que você esteja utilizando)
+                    sh 'sleep 40' 
+                    sh 'docker compose run --rm test'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executada com sucesso!'
+        }
+        failure {
+            echo 'A pipeline falhou.'
         }
     }
 }
