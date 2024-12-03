@@ -6,10 +6,28 @@ pipeline {
     }
 
     stages {
+        stage('Install Docker Compose') {
+            steps {
+                script {
+                    // Verifica se o docker-compose está instalado, caso contrário instala
+                    def dockerComposeInstalled = sh(script: 'command -v docker-compose', returnStatus: true) == 0
+                    if (!dockerComposeInstalled) {
+                        echo "Docker Compose não encontrado, instalando..."
+                        sh '''
+                            # Atualiza o repositório e instala o Docker Compose
+                            sudo apt-get update
+                            sudo apt-get install -y docker-compose
+                        '''
+                    } else {
+                        echo "Docker Compose já está instalado."
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
-                    // Verifica se o Docker Compose está corretamente configurado
                     sh '''
                         docker-compose down || true   # Evita erro caso o docker-compose não tenha contêineres ativos
                         docker-compose build --no-cache
