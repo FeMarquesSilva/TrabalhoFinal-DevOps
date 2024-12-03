@@ -5,14 +5,18 @@ pipeline {
         COMPOSE_FILE = 'docker-compose.yml'
     }
 
+    tools {
+        docker 'docker'  // Nome da ferramenta Docker configurada no Jenkins
+    }
+
     stages {
         stage('Build') {
             steps {
                 sh '''
-                    docker compose down
-                    docker compose build --no-cache
-                    docker compose up -d
-                    docker compose ps
+                    docker-compose down
+                    docker-compose build --no-cache
+                    docker-compose up -d
+                    docker-compose ps
                 '''
             }
         }
@@ -40,13 +44,12 @@ pipeline {
 
         stage('Test') {
             steps {
-        sh '''
-            echo "Rodando testes com pytest..."
+                sh '''
+                    echo "Rodando testes com pytest..."
 
-
-            # Rodando os testes com pytest
-            pytest app/testAddAluno.py --maxfail=1 --disable-warnings -q
-        '''
+                    # Rodando os testes com pytest
+                    pytest app/testAddAluno.py --maxfail=1 --disable-warnings -q
+                '''
             }
         }
     }

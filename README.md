@@ -71,6 +71,8 @@ Pipeline CI/CD:
 Configure o Jenkins para utilizar o Jenkinsfile.
 Ajuste as credenciais no Jenkins para integração com o repositório e o Docker.
 
+
+
 Monitoramento
 
 Prometheus: Coleta métricas de todos os serviços registrados.
