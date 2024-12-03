@@ -23,8 +23,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    sudo apt-get update -y
-                    sudo apt-get install -y docker.io
+                    apt-get update -y
+                    apt-get install -y docker.io
                     '''
                 }
             }
@@ -34,8 +34,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    sudo apt-get install -y python3-pip
-                    sudo pip3 install docker-compose
+                    apt-get install -y python3-pip
+                    pip3 install docker-compose
                     '''
                 }
             }
