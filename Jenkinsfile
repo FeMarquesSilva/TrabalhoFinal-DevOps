@@ -18,13 +18,13 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Install Docker') {
             steps {
                 script {
                     sh '''
-                    apt-get update -y
-                    apt-get install -y docker.io
+                    sudo apt-get update -y
+                    sudo apt-get install -y docker.io
                     '''
                 }
             }
@@ -34,8 +34,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    apt-get install -y python3-pip
-                    pip3 install docker-compose
+                    sudo apt-get install -y python3-pip
+                    sudo pip3 install docker-compose
                     '''
                 }
             }
