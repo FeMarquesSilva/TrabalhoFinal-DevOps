@@ -22,7 +22,8 @@ Exit
 #Encerra de forma forçada o prometeus(Isso pois meu not ficou iniciando incorretamente o prometheus no not):
 sudo systemctl stop prometheus
 
-
+#Iniciar Jenkins:
+sudo systemctl start jenkins
 
 
 
