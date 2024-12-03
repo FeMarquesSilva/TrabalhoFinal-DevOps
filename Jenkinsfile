@@ -10,7 +10,8 @@ pipeline {
             steps {
                 sh '''
                     docker compose down
-                    docker compose up --build -d
+                    docker compose build --no-cache
+                    docker compose up -d
                     docker compose ps
                 '''
             }
@@ -39,20 +40,13 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh '''
-                    echo "Testando GET /alunos"
-                    curl -s -o /dev/null -w "%{http_code}" -X GET http://localhost:5000/alunos || exit 1
+        sh '''
+            echo "Rodando testes com pytest..."
 
-                    echo "Testando POST /alunos"
-                    curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:5000/alunos \
-                    -H "Content-Type: application/json" \
-                    -d '{
-                        "nome": "Teste",
-                        "sobrenome": "Teste",
-                        "turma": "Teste",
-                        "disciplinas": "Teste1, Teste2"
-                    }' || exit 1
-                '''
+
+            # Rodando os testes com pytest
+            pytest app/testAddAluno.py --maxfail=1 --disable-warnings -q
+        '''
             }
         }
     }
