@@ -54,7 +54,7 @@ services:
     build:
       context: ./flask
       dockerfile: Dockerfile_flask
-    command: [ "pytest", "testAddAluno.py" ] # Roda os testes no arquivo test_app.py
+    command: [ "sh", "-c", "sleep 30 && pytest testAddAluno.py" ] # Roda os testes no arquivo test_app.py
     depends_on:
       - mariadb
       - flask
