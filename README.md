@@ -61,6 +61,10 @@ Faça login:
 *senha: admin
 ![image](https://github.com/user-attachments/assets/d7cde5fe-4f52-44cc-9f04-3540e9151ceb)
 
+Acesse a guia Alunos e veja a Lista de alunos:
+
+![image](https://github.com/user-attachments/assets/e48d76c3-efd0-47fc-97a9-fadb72b32e6a)
+
 
 Pipeline CI/CD:
 
