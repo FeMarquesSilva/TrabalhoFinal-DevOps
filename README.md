@@ -61,16 +61,47 @@ Faça login:
 *senha: admin
 ![image](https://github.com/user-attachments/assets/d7cde5fe-4f52-44cc-9f04-3540e9151ceb)
 
-Acesse a guia Alunos e veja a Lista de alunos:
+Acesse a guia Alunos e veja a Lista de alunos o qual já deverá ter um aluno que rodou de teste cadatrado:
 
-![image](https://github.com/user-attachments/assets/e48d76c3-efd0-47fc-97a9-fadb72b32e6a)
+![image](https://github.com/user-attachments/assets/cc6f646b-88c3-40a8-91fc-2d2f91c17d8f)
+
+#Cadastro de aluno pela rota post
+
+Caso queira de forma externa realizar o cadastro de um alumo como pelo postman, basta abrir o aplicativo e cadastrar da seguinte forma:
+
+![image](https://github.com/user-attachments/assets/14f17a11-8137-4669-9f33-c9dd49f2c14b)
+
+Assim, o mesmo surgira na lista conforme abaixo:
+
+![image](https://github.com/user-attachments/assets/753c31c9-e859-4c99-a8c0-493b88e639c4)
 
 
-Pipeline CI/CD:
+#Pipeline Jenkins CI/CD:
 
-Configure o Jenkins para utilizar o Jenkinsfile.
-Ajuste as credenciais no Jenkins para integração com o repositório e o Docker.
+##Inicie o Jenkins:
+sudo systemctl start jenkins
 
+sudo systemctl enable jenkins
+
+Verifique o status do Jenkins:
+
+sudo systemctl status jenkins
+
+Configure um pipeline utilizando o arquivo Jenkinsfile disponível no repositório.
+
+Acesse a aplicação em: http://localhost:8080
+
+Faça login com as credenciais:
+
+Usuário: admin
+
+Senha:
+
+Para localizar a senha de adimin, utilize o comando " docker exec -it jenkins bash" qual entrará no cointeiner do jenkins, e após use cat /var/jenkins_home/secrets/initialAdminPassword
+assim a senha aparecerá no terminal.
+
+Crie um novo projeto, busque de um diretório git, HTTP, e adicione o git: https://github.com/FeMarquesSilva/Trabalho_DevOps_22.8883-5.git
+Agora basta construir a pipeline.
 
 
 Monitoramento
