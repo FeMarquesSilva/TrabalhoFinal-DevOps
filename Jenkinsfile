@@ -1,30 +1,31 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_REPO = 'https://github.com/FeMarquesSilva/Trabalho_DevOps_22.8883-5.git'
+        BRANCH = 'main'  // Certifique-se de que é o ramo correto
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Declarative: Checkout SCM') {
             steps {
-                git 'https://github.com/FeMarquesSilva/Trabalho_DevOps_22.8883-5.git'
+                script {
+                    checkout scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: "*/${env.BRANCH}"]],
+                        userRemoteConfigs: [[url: env.GIT_REPO]]
+                    ]
+                }
             }
         }
-
+        
         stage('Install Docker') {
             steps {
                 script {
-                    // Verificar se o Docker está instalado
-                    def dockerInstalled = sh(script: 'which docker', returnStatus: true) == 0
-                    if (!dockerInstalled) {
-                        echo 'Docker não encontrado. Instalando...'
-                        sh '''
-                            sudo apt-get update
-                            sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-                            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-                            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-                            sudo apt-get update
-                            sudo apt-get install -y docker-ce
-                            sudo usermod -aG docker jenkins
-                        '''
-                    }
+                    sh '''
+                    apt-get update -y
+                    apt-get install -y docker.io
+                    '''
                 }
             }
         }
@@ -32,15 +33,10 @@ pipeline {
         stage('Install Docker Compose') {
             steps {
                 script {
-                    // Verificar se o Docker Compose está instalado
-                    def dockerComposeInstalled = sh(script: 'which docker-compose', returnStatus: true) == 0
-                    if (!dockerComposeInstalled) {
-                        echo 'Docker Compose não encontrado. Instalando...'
-                        sh '''
-                            sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                            sudo chmod +x /usr/local/bin/docker-compose
-                        '''
-                    }
+                    sh '''
+                    apt-get install -y python3-pip
+                    pip3 install docker-compose
+                    '''
                 }
             }
         }
@@ -48,12 +44,8 @@ pipeline {
         stage('Build and Deploy') {
             steps {
                 script {
-                    // Garantir que o Docker e o Docker Compose estão funcionando
-                    sh 'docker --version'
-                    sh 'docker-compose --version'
-
-                    // Rodar a construção com o Docker Compose
                     sh 'docker-compose build'
+                    sh 'docker-compose up -d'
                 }
             }
         }
@@ -61,17 +53,18 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Rodar os testes
-                    echo 'Rodando testes...'
+                    sh 'docker-compose exec app pytest tests/'
                 }
             }
         }
-
-        stage('Post Actions') {
-            steps {
-                echo 'Pipeline concluída.'
-                sh 'docker-compose down'
-            }
+    }
+    
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
