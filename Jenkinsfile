@@ -5,10 +5,6 @@ pipeline {
         COMPOSE_FILE = 'docker-compose.yml'
     }
 
-    tools {
-        docker 'docker'  // Nome da ferramenta Docker configurada no Jenkins
-    }
-
     stages {
         stage('Build') {
             steps {
