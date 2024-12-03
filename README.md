@@ -1,6 +1,4 @@
-# ========================================#
 Autor: Felipe Marques da Silva
-# ========================================#
 
 # Projeto Final - Ambiente Monitorado com Pipeline CI/CD
 
@@ -32,7 +30,7 @@ Certifique-se de ter os seguintes softwares instalados:
 
    ```bash
    git clone https://github.com/FeMarquesSilva/Trabalho_DevOps_22.8883-5.git
-   cd PROJETOFINAL
+
 Configure o arquivo .env (se necessário) para o exportador MySQL no diretório exporter/.
 Certifique-se de que os arquivos de configuração, como prometheus.yml e datasources.yml, estão ajustados conforme as suas necessidades.
 
@@ -40,18 +38,33 @@ Como Executar
 Inicie os contêineres:
 
 docker-compose build --no-cache
+
 docker-compose up -d
 
-Acesse os serviços:
+Acesse os serviços 'localhoust':
 
-Aplicação Flask: http://localhost:5000
-Grafana: http://localhost:3000
-Prometheus: http://localhost:9090
+![image](https://github.com/user-attachments/assets/37fda319-f5c3-4424-bc91-a71a0efd0ab4)
+
 
 Configuração do Grafana:
 
 Faça login no Grafana (admin/admin).
-Configure a fonte de dados para Prometheus, se necessário.
+![image](https://github.com/user-attachments/assets/9995dae5-4779-4407-924a-e19f9019fd65)
+![image](https://github.com/user-attachments/assets/c30b2e07-5d87-4c93-8dae-a9857dcc1881)
+
+Configuração do App Flask:
+
+Faça login:
+
+*User: admin
+
+*senha: admin
+![image](https://github.com/user-attachments/assets/d7cde5fe-4f52-44cc-9f04-3540e9151ceb)
+
+Acesse a guia Alunos e veja a Lista de alunos:
+
+![image](https://github.com/user-attachments/assets/e48d76c3-efd0-47fc-97a9-fadb72b32e6a)
+
 
 Pipeline CI/CD:
 
